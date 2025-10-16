@@ -12,11 +12,23 @@ import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Skills from '../components/Skills.astro';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
+// Storyblok imports
+import { useStoryblokApi } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection('work'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 4);
+
+// Storyblok: Fetch home story
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get('cdn/stories/home', {
+  version: import.meta.env.DEV ? "draft" : "published",
+});
+
+const content = data.story.content;
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
@@ -100,6 +112,15 @@ const projects = (await getCollection('work'))
 		</main>
 
 		<ContactCTA />
+
+		<!-- Storyblok Content -->
+		<section class="section with-background">
+			<header class="section-header stack gap-2 lg:gap-4">
+				<h3>Blog</h3>
+				<p>Latest posts from our blog</p>
+			</header>
+			<StoryblokComponent blok={content} />
+		</section>
 	</div>
 </BaseLayout>
 

@@ -113,13 +113,23 @@ const content = data.story.content;
 
 		<ContactCTA />
 
-		<!-- Storyblok Content -->
-		<section class="section with-background">
+		<!-- Blog Section -->
+		<section class="section with-background with-cta bg-variant">
 			<header class="section-header stack gap-2 lg:gap-4">
-				<h3>Blog</h3>
-				<p>Latest posts from our blog</p>
+				<h3>Latest Blog Posts</h3>
+				<p>Read my thoughts on development, design, and building products.</p>
 			</header>
-			<StoryblokComponent blok={content} />
+
+			<div class="gallery">
+				<StoryblokComponent blok={content} />
+			</div>
+
+			<div class="cta">
+				<CallToAction href="/blog/">
+					View All
+					<Icon icon="arrow-right" size="1.2em" />
+				</CallToAction>
+			</div>
 		</section>
 	</div>
 </BaseLayout>

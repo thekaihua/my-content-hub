@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config';
 import { storyblok } from '@storyblok/astro';
 import { loadEnv } from 'vite';
+import mkcert from 'vite-plugin-mkcert';
 
 const env = loadEnv("", process.cwd(), 'STORYBLOK');
+const { STORYBLOK_TOKEN } = loadEnv(import.meta.env.MODE, process.cwd(), "");
 
 export default defineConfig({
 	integrations: [
@@ -16,8 +18,12 @@ export default defineConfig({
 		apiOptions: {
 			region: 'eu',
 		},
-		livePreview: false,
-		bridge: false,
+		livePreview: true,
+		bridge: true,
 	}),
 	],
+	output: 'server',
+	vite: {
+		plugins: [mkcert()]
+	},
 });

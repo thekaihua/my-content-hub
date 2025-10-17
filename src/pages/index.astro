@@ -88,6 +88,25 @@ const content = data.story.content;
 				</div>
 			</section>
 
+			<!-- Blog Section -->
+			<section class="section with-background with-cta">
+				<header class="section-header stack gap-2 lg:gap-4">
+					<h3>Latest Blog Posts</h3>
+					<p>Read my thoughts on development, design, and building products.</p>
+				</header>
+
+				<div class="gallery">
+					<StoryblokComponent blok={content} />
+				</div>
+
+				<div class="cta">
+					<CallToAction href="/blog/">
+						View All
+						<Icon icon="arrow-right" size="1.2em" />
+					</CallToAction>
+				</div>
+			</section>
+
 			<section class="section with-background bg-variant">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Mentions</h3>
@@ -112,25 +131,6 @@ const content = data.story.content;
 		</main>
 
 		<ContactCTA />
-
-		<!-- Blog Section -->
-		<section class="section with-background with-cta bg-variant">
-			<header class="section-header stack gap-2 lg:gap-4">
-				<h3>Latest Blog Posts</h3>
-				<p>Read my thoughts on development, design, and building products.</p>
-			</header>
-
-			<div class="gallery">
-				<StoryblokComponent blok={content} />
-			</div>
-
-			<div class="cta">
-				<CallToAction href="/blog/">
-					View All
-					<Icon icon="arrow-right" size="1.2em" />
-				</CallToAction>
-			</div>
-		</section>
 	</div>
 </BaseLayout>
 

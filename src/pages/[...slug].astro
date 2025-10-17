@@ -1,5 +1,5 @@
 ---
-import { useStoryblokApi } from '@storyblok/astro'
+import { useStoryblokApi, getLiveStory } from '@storyblok/astro'
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
 export async function getStaticPaths() {
@@ -19,13 +19,21 @@ export async function getStaticPaths() {
   });
 }
 
-const sbApi = useStoryblokApi();
 const { slug } = Astro.params;
-const { data } = await sbApi.get(`cdn/stories/${slug}`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
 
-const story = data.story;
+// Support live preview
+let story = null;
+const liveStory = await getLiveStory(Astro);
+
+if (liveStory) {
+  story = liveStory;
+} else {
+  const sbApi = useStoryblokApi();
+  const { data } = await sbApi.get(`cdn/stories/${slug}`, {
+    version: import.meta.env.DEV ? "draft" : "published",
+  });
+  story = data.story;
+}
 ---
 
 <html lang="en">

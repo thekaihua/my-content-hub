@@ -15,7 +15,7 @@ const publishDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
 });
 ---
 
-<a class="card" href={`/blog/${post.slug}`}>
+<a class="card" href={`/${post.slug}`}>
   <span class="title">{post.title}</span>
   <div class="meta">
     <time datetime={post.publishedAt}>{publishDate}</time>

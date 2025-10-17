@@ -25,7 +25,7 @@ const { blok } = Astro.props
   {posts.map(post => (
     <li>
       <time>{post.date}</time>
-      <a href={post.slug}>{post.title}</a>
+      <a href={`/${post.slug}`}>{post.title}</a>
       <p>{post.description}</p>
     </li>
   ))}
